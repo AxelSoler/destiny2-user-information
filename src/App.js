@@ -64,6 +64,7 @@ const App = () => {
         <button type="submit">SEARCH</button>
       </form>
       <h2>USER</h2>
+      <img src={`https://www.bungie.net${user.iconPath}`} alt="console" />
       <p>
         Bungie name:
         {user.bungieGlobalDisplayName}
@@ -82,6 +83,6 @@ const App = () => {
       ))}
     </div>
   );
-}
+};
 
 export default App;
