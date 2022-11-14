@@ -86,12 +86,16 @@ const App = () => {
               <p>
                 Class:
                 {' '}
-                {characters[character].classType}
+                { characters[character].classType === 0 && 'Titan' }
+                { characters[character].classType === 1 && 'Hunter' }
+                { characters[character].classType === 2 && 'Warlock' }
               </p>
               <p>
                 Race:
                 {' '}
-                {characters[character].raceType}
+                { characters[character].raceType === 0 && 'Human' }
+                { characters[character].raceType === 1 && 'Awoken' }
+                { characters[character].raceType === 2 && 'Exo' }
               </p>
               <p>
                 Character light:
