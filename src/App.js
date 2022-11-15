@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Character from './components/Character';
 
 const destinyCharacterURL = 'https://www.bungie.net/Platform/Destiny2/';
 const destinyUserURL = 'https://www.bungie.net/Platform/User/Search/Prefix/';
+
+// npm install dotenv
 const apiKey = '96e8ddde744f4a17bc7f2337f87cb563';
 
 const App = () => {
@@ -54,7 +57,7 @@ const App = () => {
     <div className="App">
       <h1>Destiny2</h1>
       <form onSubmit={handleSubmit}>
-        <h2>Search a guardian</h2>
+        <h2>Search a Guardian</h2>
         <input onChange={onChange} type="text" placeholder="Guardian Name" />
         <button type="submit">SEARCH</button>
       </form>
@@ -77,84 +80,14 @@ const App = () => {
           </p>
         </section>
       )}
-      { Object.keys(characters).length === 0 && <h2>There are no characters</h2> }
+      { Object.keys(characters).length === 0 && <h2>Waiting for Guardians</h2> }
       { Object.keys(characters).length !== 0 && (
         <section id="characters">
           <h2>CHARACTERS</h2>
           <ul>
             {Object.keys(characters).map((character) => (
               <li key={characters[character].characterId}>
-                <div>
-                  <img src={`https://www.bungie.net${characters[character].emblemBackgroundPath}`} alt="console" />
-                  <p>
-                    Class:
-                    {' '}
-                    { characters[character].classType === 0 && 'Titan' }
-                    { characters[character].classType === 1 && 'Hunter' }
-                    { characters[character].classType === 2 && 'Warlock' }
-                  </p>
-                  <p>
-                    Race:
-                    {' '}
-                    { characters[character].raceType === 0 && 'Human' }
-                    { characters[character].raceType === 1 && 'Awoken' }
-                    { characters[character].raceType === 2 && 'Exo' }
-                  </p>
-                  <p>
-                    Character light:
-                    {' '}
-                    {characters[character].light}
-                  </p>
-                  <p>
-                    Character id:
-                    {' '}
-                    {characters[character].characterId}
-                  </p>
-                  <p>
-                    Last played:
-                    {' '}
-                    {characters[character].dateLastPlayed}
-                  </p>
-                  <p>
-                    Time played:
-                    {' '}
-                    {characters[character].minutesPlayedTotal}
-                    {' '}
-                    min
-                  </p>
-                  <ul>
-                    <li>
-                      Movilidad:
-                      {' '}
-                      {characters[character].stats[2996146975]}
-                    </li>
-                    <li>
-                      Resistencia:
-                      {' '}
-                      {characters[character].stats[392767087]}
-                    </li>
-                    <li>
-                      Recuperacion:
-                      {' '}
-                      {characters[character].stats[1943323491]}
-                    </li>
-                    <li>
-                      Disciplina:
-                      {' '}
-                      {characters[character].stats[1735777505]}
-                    </li>
-                    <li>
-                      Intelecto:
-                      {' '}
-                      {characters[character].stats[144602215]}
-                    </li>
-                    <li>
-                      Fuerza:
-                      {' '}
-                      {characters[character].stats[4244567218]}
-                    </li>
-                  </ul>
-                </div>
+                <Character guardian={character} />
               </li>
             ))}
           </ul>
