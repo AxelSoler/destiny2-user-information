@@ -13,35 +13,27 @@ const App = () => {
   const [user, setUser] = useState({});
   const [userName, setUserName] = useState('');
   const getUserCharacters = async (memberType, memberId) => {
-    try {
-      const response = await axios({
-        method: 'GET',
-        baseURL: `${destinyCharacterURL}${memberType}/Profile/${memberId}/?components=200`,
-        headers: {
-          'X-API-Key': apiKey,
-        },
-      });
-      setCharacters(response.data.Response.characters.data);
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await axios({
+      method: 'GET',
+      baseURL: `${destinyCharacterURL}${memberType}/Profile/${memberId}/?components=200`,
+      headers: {
+        'X-API-Key': apiKey,
+      },
+    });
+    setCharacters(response.data.Response.characters.data);
   };
   const getUser = async (userName) => {
-    try {
-      const response = await axios({
-        method: 'GET',
-        baseURL: `${destinyUserURL}${userName}/-1`,
-        headers: {
-          'X-API-Key': apiKey,
-        },
-      });
-      setUser(response.data.Response.searchResults[0].destinyMemberships[0]);
-      const userType = response.data.Response.searchResults[0].destinyMemberships[0].membershipType;
-      const userId = response.data.Response.searchResults[0].destinyMemberships[0].membershipId;
-      getUserCharacters(userType, userId);
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await axios({
+      method: 'GET',
+      baseURL: `${destinyUserURL}${userName}/-1`,
+      headers: {
+        'X-API-Key': apiKey,
+      },
+    });
+    setUser(response.data.Response.searchResults[0].destinyMemberships[0]);
+    const userType = response.data.Response.searchResults[0].destinyMemberships[0].membershipType;
+    const userId = response.data.Response.searchResults[0].destinyMemberships[0].membershipId;
+    getUserCharacters(userType, userId);
   };
 
   const onChange = (e) => {
@@ -87,7 +79,7 @@ const App = () => {
           <ul>
             {Object.keys(characters).map((character) => (
               <li key={characters[character].characterId}>
-                <Character guardian={character} />
+                <Character guardian={characters[character]} />
               </li>
             ))}
           </ul>

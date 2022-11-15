@@ -77,8 +77,8 @@ const Character = (props) => {
   );
 };
 
-export default Character;
-
 Character.propTypes = {
-  guardian: PropTypes.objectOf(PropTypes.object()).isRequired,
+  guardian: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
+
+export default Character;
