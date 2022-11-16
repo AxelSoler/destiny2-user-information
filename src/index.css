@@ -17,6 +17,11 @@ body {
   text-align: center;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 .consoleLogo {
   width: 64px;
 }
@@ -25,4 +30,11 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.charactersUl {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }

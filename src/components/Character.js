@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
+import './Character.css';
 
 const Character = (props) => {
   const { guardian } = props;
   const lastPlayed = new Date(guardian.dateLastPlayed).toString().slice(3).split('GMT')[0];
   return (
     <div>
-      <img src={`https://www.bungie.net${guardian.emblemBackgroundPath}`} alt="console" />
+      <img className="emblem" src={`https://www.bungie.net${guardian.emblemBackgroundPath}`} alt="console" />
       <p>
         Class:
         {' '}

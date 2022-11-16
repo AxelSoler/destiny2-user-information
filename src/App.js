@@ -74,7 +74,7 @@ const App = () => {
       { Object.keys(characters).length !== 0 && (
         <section id="characters">
           <h2>CHARACTERS</h2>
-          <ul>
+          <ul className="charactersUl">
             {Object.keys(characters).map((character) => (
               <li key={characters[character].characterId}>
                 <Character guardian={characters[character]} />
