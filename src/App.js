@@ -70,7 +70,7 @@ const App = () => {
           </p>
         </section>
       )}
-      { Object.keys(characters).length === 0 && <h2>Waiting for Guardians</h2> }
+      { Object.keys(characters).length === 0 && <h2>Waiting for Guardians ...</h2> }
       { Object.keys(characters).length !== 0 && (
         <section id="characters">
           <h2>CHARACTERS</h2>

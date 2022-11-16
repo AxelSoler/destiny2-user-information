@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 const Character = (props) => {
   const { guardian } = props;
+  const lastPlayed = new Date(guardian.dateLastPlayed).toString().slice(3).split('GMT')[0];
   return (
     <div>
       <img src={`https://www.bungie.net${guardian.emblemBackgroundPath}`} alt="console" />
@@ -32,7 +33,7 @@ const Character = (props) => {
       <p>
         Last played:
         {' '}
-        {guardian.dateLastPlayed}
+        {lastPlayed}
       </p>
       <p>
         Time played:
