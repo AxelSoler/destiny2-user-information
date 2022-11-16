@@ -16,3 +16,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
+.consoleLogo {
+  width: 64px;
+}
+
+.user {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

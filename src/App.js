@@ -53,15 +53,13 @@ const App = () => {
         <input onChange={onChange} type="text" placeholder="Guardian Name" />
         <button type="submit">SEARCH</button>
       </form>
-      { Object.keys(user).length === 0 && <h2>There are no users</h2> }
       { Object.keys(user).length !== 0 && (
         <section id="user">
           <h2>USER</h2>
-          <img src={`https://www.bungie.net${user.iconPath}`} alt="console" />
-          <p>
-            Bungie name:
-            {user.bungieGlobalDisplayName}
-          </p>
+          <div className="user">
+            <img className="consoleLogo" src={`https://www.bungie.net${user.iconPath}`} alt="console" />
+            <h3>{user.bungieGlobalDisplayName}</h3>
+          </div>
           <p>
             membership id:
             {user.membershipId}
