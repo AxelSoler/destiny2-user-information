@@ -47,7 +47,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Destiny2</h1>
+      <h1 className="text-3xl font-bold underline">Destiny2</h1>
       <form onSubmit={handleSubmit}>
         <h2>Search a Guardian</h2>
         <input onChange={onChange} type="text" placeholder="Guardian Name" />
