@@ -2,11 +2,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import Character from './components/Character';
 
-const destinyCharacterURL = 'https://www.bungie.net/Platform/Destiny2/';
-const destinyUserURL = 'https://www.bungie.net/Platform/User/Search/Prefix/';
-
-// npm install dotenv
-const apiKey = '96e8ddde744f4a17bc7f2337f87cb563';
+const destinyCharacterURL = process.env.REACT_APP_DESTINY_CHARACTER_URL;
+const destinyUserURL = process.env.REACT_APP_DESTINY_USER_URL;
+const apiKey = process.env.REACT_APP_DESTINY_API_KEY;
 
 const App = () => {
   const [characters, setCharacters] = useState({});
@@ -17,7 +15,7 @@ const App = () => {
       method: 'GET',
       baseURL: `${destinyCharacterURL}${memberType}/Profile/${memberId}/?components=200`,
       headers: {
-        'X-API-Key': apiKey,
+        'X-API-Key': `${apiKey}`,
       },
     });
     setCharacters(response.data.Response.characters.data);
@@ -27,7 +25,7 @@ const App = () => {
       method: 'GET',
       baseURL: `${destinyUserURL}${userName}/-1`,
       headers: {
-        'X-API-Key': apiKey,
+        'X-API-Key': `${apiKey}`,
       },
     });
     setUser(response.data.Response.searchResults[0].destinyMemberships[0]);
