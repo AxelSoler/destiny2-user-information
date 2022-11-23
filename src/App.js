@@ -40,39 +40,33 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.target.reset();
     getUser(userName);
   };
 
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">Destiny2</h1>
-      <form onSubmit={handleSubmit}>
-        <h2>Search for a Guardian</h2>
-        <input onChange={onChange} type="text" placeholder="Guardian Name" />
-        <button type="submit" className="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900">SEARCH</button>
+    <div className="App flex flex-col items-center pt-12">
+      <h1 className="text-5xl text-primary font-bold mb-6">DESTINY 2: PROJECT GORIXEW</h1>
+      <form onSubmit={handleSubmit} className="form-control">
+        <div className="label">
+          <span className="label-text text-secondary">Search for a Guardian</span>
+        </div>
+        <label htmlFor="Search" className="input-group">
+          <input onChange={onChange} type="text" placeholder="Guardian Name" className="input input-bordered input-primary w-full max-w-xs" />
+          <button type="submit" className="btn btn-outline btn-secondary text-center text-sm font-semibold transition duration-200 ease-in-out hover:bg-gray-900">SEARCH</button>
+        </label>
       </form>
       { Object.keys(user).length !== 0 && (
-        <section id="user">
-          <h2>USER</h2>
-          <div className="user">
-            <img className="consoleLogo" src={`https://www.bungie.net${user.iconPath}`} alt="console" />
-            <h3>{user.bungieGlobalDisplayName}</h3>
-          </div>
-          <p>
-            membership id:
-            {user.membershipId}
-          </p>
-          <p>
-            membershipType:
-            {user.membershipType}
-          </p>
+        <section id="user" className="flex items-center m-10">
+          <img className="consoleLogo" src={`https://www.bungie.net${user.iconPath}`} alt="console" />
+          <h2 className="text-3xl">{user.bungieGlobalDisplayName}</h2>
         </section>
       )}
-      { Object.keys(characters).length === 0 && <h2>Waiting for Guardians ...</h2> }
+      { Object.keys(characters).length === 0 && <h2 className="text-3xl font-bold text-info mt-24">Waiting for Guardians . . .</h2> }
       { Object.keys(characters).length !== 0 && (
         <section id="characters">
-          <h2>CHARACTERS</h2>
-          <ul className="charactersUl">
+          <h2 className="text-3xl font-bold text-info underline mb-8">CHARACTERS</h2>
+          <ul className="flex flex-wrap gap-6 justify-center">
             {Object.keys(characters).map((character) => (
               <li key={characters[character].characterId}>
                 <Character guardian={characters[character]} />
