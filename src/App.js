@@ -47,9 +47,9 @@ const App = () => {
     <div className="App">
       <h1 className="text-3xl font-bold underline">Destiny2</h1>
       <form onSubmit={handleSubmit}>
-        <h2>Search a Guardian</h2>
+        <h2>Search for a Guardian</h2>
         <input onChange={onChange} type="text" placeholder="Guardian Name" />
-        <button type="submit">SEARCH</button>
+        <button type="submit" className="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900">SEARCH</button>
       </form>
       { Object.keys(user).length !== 0 && (
         <section id="user">
