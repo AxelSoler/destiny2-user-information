@@ -6,7 +6,7 @@ const Character = (props) => {
   const lastPlayed = new Date(guardian.dateLastPlayed).toString().slice(3, 15);
   return (
     <div className="flex flex-col items-center">
-      <div className="flex text-xl mb-4">
+      <div className="flex text-2xl mb-4">
         <p className="text-success mr-2">
           { guardian.raceType === 0 && 'Human' }
           { guardian.raceType === 1 && 'Awoken' }
@@ -20,45 +20,53 @@ const Character = (props) => {
           {guardian.light}
         </p>
       </div>
-      <img className="emblem mb-4" src={`https://www.bungie.net${guardian.emblemBackgroundPath}`} alt="console" />
-      <ul className="w-3/4">
-        <li className="flex justify-between">
-          <p>Movilidad:</p>
-          <p>{guardian.stats[2996146975]}</p>
-        </li>
-        <li className="flex justify-between">
-          <p>Resistencia:</p>
-          <p>{guardian.stats[392767087]}</p>
-        </li>
-        <li className="flex justify-between">
-          <p>Recuperacion::</p>
-          <p>{guardian.stats[1943323491]}</p>
-        </li>
-        <li className="flex justify-between">
-          <p>Disciplina:</p>
-          <p>{guardian.stats[1735777505]}</p>
-        </li>
-        <li className="flex justify-between">
-          <p>Intelecto:</p>
-          <p>{guardian.stats[144602215]}</p>
-        </li>
-        <li className="flex justify-between">
-          <p>Fuerza:</p>
-          <p>{guardian.stats[4244567218]}</p>
-        </li>
-        <li className="flex justify-between">
-          <p>Total time:</p>
-          <p>
-            {guardian.minutesPlayedTotal}
-            {' '}
-            min
-          </p>
-        </li>
-        <li className="flex justify-between">
-          <p>Last played:</p>
-          <p>{lastPlayed}</p>
-        </li>
-      </ul>
+      <img className="emblem mb-4 ring-offset-2 ring-2" src={`https://www.bungie.net${guardian.emblemBackgroundPath}`} alt="console" />
+      <div className="collapse border-primary rounded-box collapse-arrow ring-offset-2 ring-2 shadow-lg shadow-slate-500">
+        <input type="checkbox" className="peer" />
+        <div className="text-xl collapse-title bg-primary text-primary-content peer-checked:bg-primary-focus peer-checked:text-secondary-content">
+          MAIN STATS
+        </div>
+        <div className="w-64 flex flex-col items-center collapse-content bg-primary text-primary-content peer-checked:bg-primary-focus peer-checked:text-secondary-content">
+          <ul className="w-48">
+            <li className="flex justify-between bg-primary p-1 rounded">
+              <p>Mobility:</p>
+              <p>{guardian.stats[2996146975]}</p>
+            </li>
+            <li className="flex justify-between p-1">
+              <p>Resilience:</p>
+              <p>{guardian.stats[392767087]}</p>
+            </li>
+            <li className="flex justify-between bg-primary p-1 rounded">
+              <p>Recovery:</p>
+              <p>{guardian.stats[1943323491]}</p>
+            </li>
+            <li className="flex justify-between p-1">
+              <p>Discipline:</p>
+              <p>{guardian.stats[1735777505]}</p>
+            </li>
+            <li className="flex justify-between bg-primary p-1 rounded">
+              <p>Intellect:</p>
+              <p>{guardian.stats[144602215]}</p>
+            </li>
+            <li className="flex justify-between p-1">
+              <p>Strength:</p>
+              <p>{guardian.stats[4244567218]}</p>
+            </li>
+            <li className="flex justify-between bg-primary p-1 rounded">
+              <p>Total time:</p>
+              <p>
+                {guardian.minutesPlayedTotal}
+                {' '}
+                min
+              </p>
+            </li>
+            <li className="flex justify-between p-1">
+              <p>Last played:</p>
+              <p>{lastPlayed}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
