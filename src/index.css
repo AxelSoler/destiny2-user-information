@@ -21,12 +21,6 @@ body {
   width: 48px;
 }
 
-#user {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 input {
   color: black;
 }
