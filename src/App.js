@@ -10,6 +10,8 @@ const App = () => {
   const [characters, setCharacters] = useState({});
   const [user, setUser] = useState({});
   const [userName, setUserName] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const getUserCharacters = async (memberType, memberId) => {
     const response = await axios({
       method: 'GET',
@@ -19,8 +21,13 @@ const App = () => {
       },
     });
     setCharacters(response.data.Response.characters.data);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
   const getUser = async (userName) => {
+    setLoading(true);
+    setCharacters({});
     const response = await axios({
       method: 'GET',
       baseURL: `${destinyUserURL}${userName}/-1`,
@@ -46,7 +53,7 @@ const App = () => {
 
   return (
     <div className="App flex flex-col items-center pt-12">
-      <h1 className="text-5xl text-primary font-bold mb-6">DESTINY 2: PROJECT GORIXEW</h1>
+      <h1 className="text-5xl text-primary font-bold mb-6">ANOTHER DESTINY 2 WEBPAGE</h1>
       <form onSubmit={handleSubmit} className="form-control">
         <div className="label">
           <span className="label-text text-secondary">Search for a Guardian</span>
@@ -56,24 +63,37 @@ const App = () => {
           <button type="submit" className="btn btn-outline btn-secondary text-center text-sm font-semibold transition duration-200 ease-in-out hover:bg-gray-900">SEARCH</button>
         </label>
       </form>
-      { Object.keys(user).length !== 0 && (
-        <section id="user" className="flex items-center m-10">
-          <img className="consoleLogo" src={`https://www.bungie.net${user.iconPath}`} alt="console" />
-          <h2 className="text-3xl">{user.bungieGlobalDisplayName}</h2>
-        </section>
-      )}
-      { Object.keys(characters).length === 0 && <h2 className="text-3xl font-bold text-info mt-24">Waiting for Guardians . . .</h2> }
-      { Object.keys(characters).length !== 0 && (
-        <section id="characters">
-          <h2 className="text-3xl font-bold text-info underline mb-8">CHARACTERS</h2>
-          <ul className="flex flex-wrap gap-6 justify-center">
-            {Object.keys(characters).map((character) => (
-              <li key={characters[character].characterId}>
-                <Character guardian={characters[character]} />
-              </li>
-            ))}
-          </ul>
-        </section>
+      { loading ? (
+        <div className="loader">
+          <div className="spinner"> </div>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center">
+          { Object.keys(characters).length === 0 && (
+            <div className="flex flex-col">
+              <h2 className="text-3xl font-bold text-info mt-12">Waiting for Guardians</h2>
+              <h2 className="text-3xl font-bold text-info">. . .</h2>
+            </div>
+          )}
+          { Object.keys(user).length !== 0 && (
+            <section id="user" className="flex items-center m-10">
+              <img className="consoleLogo" src={`https://www.bungie.net${user.iconPath}`} alt="console" />
+              <h2 className="text-3xl">{user.bungieGlobalDisplayName}</h2>
+            </section>
+          )}
+          { Object.keys(characters).length !== 0 && (
+            <section id="characters">
+              <h2 className="text-3xl font-bold text-info underline mb-8">CHARACTERS</h2>
+              <ul className="flex flex-wrap gap-6 justify-center">
+                {Object.keys(characters).map((character) => (
+                  <li key={characters[character].characterId}>
+                    <Character guardian={characters[character]} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
       )}
     </div>
   );
