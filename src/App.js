@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Character from './components/Character';
+import BouncingBalls from './components/BouncingBalls';
 
 const destinyCharacterURL = process.env.REACT_APP_DESTINY_CHARACTER_URL;
 const destinyUserURL = process.env.REACT_APP_DESTINY_USER_URL;
@@ -70,9 +71,13 @@ const App = () => {
       ) : (
         <div className="flex flex-col items-center">
           { Object.keys(characters).length === 0 && (
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <h2 className="text-3xl font-bold text-info mt-12">Waiting for Guardians</h2>
-              <h2 className="text-3xl font-bold text-info">. . .</h2>
+              <div className="flex h-16">
+                <BouncingBalls />
+                <BouncingBalls />
+                <BouncingBalls />
+              </div>
             </div>
           )}
           { Object.keys(user).length !== 0 && (
