@@ -12,6 +12,7 @@ const App = () => {
   const [user, setUser] = useState({});
   const [userName, setUserName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [guardianFound, setGuardianFound] = useState('guardianFound');
 
   const getUserCharacters = async (memberType, memberId) => {
     const response = await axios({
@@ -36,10 +37,18 @@ const App = () => {
         'X-API-Key': `${apiKey}`,
       },
     });
-    setUser(response.data.Response.searchResults[0].destinyMemberships[0]);
-    const userType = response.data.Response.searchResults[0].destinyMemberships[0].membershipType;
-    const userId = response.data.Response.searchResults[0].destinyMemberships[0].membershipId;
-    getUserCharacters(userType, userId);
+    const data = response.data.Response.searchResults;
+    if (data.length === 0) {
+      setGuardianFound('');
+      setLoading(false);
+      setUser({});
+    } else {
+      setGuardianFound('guardianFound');
+      setUser(data[0].destinyMemberships[0]);
+      const userType = data[0].destinyMemberships[0].membershipType;
+      const userId = data[0].destinyMemberships[0].membershipId;
+      getUserCharacters(userType, userId);
+    }
   };
 
   const onChange = (e) => {
@@ -63,6 +72,9 @@ const App = () => {
           <input onChange={onChange} type="text" placeholder="Guardian Name" className="input input-bordered input-primary w-full max-w-xs" />
           <button type="submit" className="btn btn-outline btn-secondary text-center text-sm font-semibold transition duration-200 ease-in-out hover:bg-gray-900">SEARCH</button>
         </label>
+        <div className="label">
+          <span className={`label-text text-secondary ${guardianFound}`}>Guardian not found</span>
+        </div>
       </form>
       { loading ? (
         <div className="loader">
