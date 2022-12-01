@@ -11,14 +11,16 @@ const ballStyle = {
 const bounceTransition = {
   y: {
     duration: 0.4,
-    yoyo: Infinity,
+    repeat: Infinity,
+    repeatType: 'reverse',
     ease: 'easeOut',
   },
   backgroundColor: {
-    duration: 0.4,
-    yoyo: Infinity,
+    duration: 1.2,
+    repeat: Infinity,
+    repeatType: 'reverse',
     ease: 'easeOut',
-    repeatDelay: 0.4,
+    repeatDelay: 1.2,
   },
 };
 
@@ -29,7 +31,7 @@ const BouncingBalls = () => (
       transition={bounceTransition}
       animate={{
         y: ['100%', '-100%'],
-        backgroundColor: ['#ff6699', '#6666ff'],
+        backgroundColor: ['#ec4899', '#6666ff'],
       }}
     />
   </div>
