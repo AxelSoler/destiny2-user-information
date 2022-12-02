@@ -13,22 +13,30 @@ const App = () => {
   const [userName, setUserName] = useState('');
   const [loading, setLoading] = useState(false);
   const [guardianFound, setGuardianFound] = useState('guardianFound');
+  const [guardianCorrupted, setGuardianCorrupted] = useState('guardianNotCorrupted');
 
   const getUserCharacters = async (memberType, memberId) => {
-    const response = await axios({
-      method: 'GET',
-      baseURL: `${destinyCharacterURL}${memberType}/Profile/${memberId}/?components=200`,
-      headers: {
-        'X-API-Key': `${apiKey}`,
-      },
-    });
-    setCharacters(response.data.Response.characters.data);
-    setTimeout(() => {
+    try {
+      const response = await axios({
+        method: 'GET',
+        baseURL: `${destinyCharacterURL}${memberType}/Profile/${memberId}/?components=200`,
+        headers: {
+          'X-API-Key': `${apiKey}`,
+        },
+      });
+      setCharacters(response.data.Response.characters.data);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    } catch (error) {
       setLoading(false);
-    }, 1000);
+      setGuardianCorrupted('');
+      setUser({});
+    }
   };
   const getUser = async (userName) => {
     setLoading(true);
+    setGuardianCorrupted('guardianNotCorrupted');
     setCharacters({});
     const response = await axios({
       method: 'GET',
@@ -74,6 +82,9 @@ const App = () => {
         </label>
         <div className="label">
           <span className={`label-text text-secondary ${guardianFound}`}>Guardian not found</span>
+        </div>
+        <div className="label">
+          <span className={`label-text text-secondary ${guardianCorrupted}`}>Guardian Corrupted</span>
         </div>
       </form>
       { loading ? (

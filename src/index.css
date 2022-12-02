@@ -58,3 +58,7 @@ input {
 .guardianFound {
   display: none;
 }
+
+.guardianNotCorrupted {
+  display: none;
+}
