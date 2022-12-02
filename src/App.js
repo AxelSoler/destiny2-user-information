@@ -35,10 +35,10 @@ const App = () => {
     }
   };
   const getUser = async (userName) => {
-    setLoading(true);
-    setGuardianCorrupted('guardianNotCorrupted');
-    setCharacters({});
     try {
+      setLoading(true);
+      setGuardianCorrupted('guardianNotCorrupted');
+      setCharacters({});
       const response = await axios({
         method: 'GET',
         baseURL: `${destinyUserURL}${userName}/-1`,
@@ -59,7 +59,6 @@ const App = () => {
         getUserCharacters(userType, userId);
       }
     } catch (error) {
-      console.log(error);
       setLoading(false);
       setGuardianCorrupted('');
       setUser({});
