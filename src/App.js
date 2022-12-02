@@ -69,7 +69,7 @@ const App = () => {
           <span className="label-text text-secondary">Search for a Guardian</span>
         </div>
         <label htmlFor="Search" className="input-group">
-          <input onChange={onChange} type="text" placeholder="Guardian Name" className="input input-bordered input-primary w-full max-w-xs" />
+          <input onChange={onChange} type="text" placeholder="Guardian Name" className="input input-bordered input-primary w-full max-w-xs bg-base-content text-base-100" />
           <button type="submit" className="btn btn-outline btn-secondary text-center text-sm font-semibold transition duration-200 ease-in-out hover:bg-gray-900">SEARCH</button>
         </label>
         <div className="label">
