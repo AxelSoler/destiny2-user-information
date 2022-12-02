@@ -38,24 +38,31 @@ const App = () => {
     setLoading(true);
     setGuardianCorrupted('guardianNotCorrupted');
     setCharacters({});
-    const response = await axios({
-      method: 'GET',
-      baseURL: `${destinyUserURL}${userName}/-1`,
-      headers: {
-        'X-API-Key': `${apiKey}`,
-      },
-    });
-    const data = response.data.Response.searchResults;
-    if (data.length === 0) {
-      setGuardianFound('');
+    try {
+      const response = await axios({
+        method: 'GET',
+        baseURL: `${destinyUserURL}${userName}/-1`,
+        headers: {
+          'X-API-Key': `${apiKey}`,
+        },
+      });
+      const data = response.data.Response.searchResults;
+      if (data.length === 0) {
+        setGuardianFound('');
+        setLoading(false);
+        setUser({});
+      } else {
+        setGuardianFound('guardianFound');
+        setUser(data[0].destinyMemberships[0]);
+        const userType = data[0].destinyMemberships[0].membershipType;
+        const userId = data[0].destinyMemberships[0].membershipId;
+        getUserCharacters(userType, userId);
+      }
+    } catch (error) {
+      console.log(error);
       setLoading(false);
+      setGuardianCorrupted('');
       setUser({});
-    } else {
-      setGuardianFound('guardianFound');
-      setUser(data[0].destinyMemberships[0]);
-      const userType = data[0].destinyMemberships[0].membershipType;
-      const userId = data[0].destinyMemberships[0].membershipId;
-      getUserCharacters(userType, userId);
     }
   };
 
